@@ -3,7 +3,9 @@ class RegistrationException(Exception):
 
 
 class ServerException(RegistrationException):
-    pass
+    def __init__(self, message):
+        super().__init__(message)
+        self.code = 'red'
 
 
 class UserException(RegistrationException):
@@ -16,3 +18,40 @@ class InputNameException(UserException):
 
 class InputPasswordException(UserException):
     pass
+
+
+# --------------------------------
+# ------------ Errors ------------
+# --------------------------------
+
+
+class InputNewUserError(ServerException):
+    pass
+
+
+class NotFoundUserError(ServerException):
+    def __init__(self, message):
+        super().__init__(message)
+        self.code = 'red'
+
+
+class FormatNameError(InputNameException):
+    def __init__(self, message):
+        super().__init__(message)
+        self.code = 'yellow'
+
+
+class OriginError(InputNameException):
+    def __init__(self, message):
+        super().__init__(message)
+        self.code = 'red'
+
+
+class FormatPasswordError(InputPasswordException):
+    pass
+
+
+class QualityError(InputPasswordException):
+    def __init__(self, message):
+        super().__init__(message)
+        self.code = 'yellow'
