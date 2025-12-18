@@ -30,6 +30,9 @@ class InputNewUserError(ServerException):
 
 
 class NotFoundUserError(ServerException):
+    def __init__(self, message):
+        super().__init__(message)
+        self.code = 'red'
     def __str__(self):
         return "Пользователь не найден."
 

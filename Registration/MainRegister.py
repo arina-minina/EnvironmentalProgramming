@@ -33,7 +33,7 @@ def password_security_check(password) -> bool:
         return False
     return True
 
-# в файле Exceptions.py всё в порядке?
+
 @app.post("/auth/register")
 async def add_new_user(user: User) -> User:
     try:
@@ -49,19 +49,18 @@ async def add_new_user(user: User) -> User:
     except RegistrationException as e:
         print(e)
     except Exception as e:
-        # здесь точно надо raise?
-        raise ServerException(f"Произошла внутренняя ошибка сервера: {e}.")
+        return ServerException(f"Произошла внутренняя ошибка сервера: {e}.")
     else:
         users.append(user)
         return user
 
-# как-то странно, что в add_new_user и в find_user ошибки по-разному обрабатываю, или это нормально?
+
 @app.get("/auth/login")
 async def find_user(user: User) -> User:
     try:
         if user not in users:
-            raise NotFoundUserError
+            raise NotFoundUserError()
     except NotFoundUserError as e:
-        print(e)
+        return str(e)
     else:
         return user
