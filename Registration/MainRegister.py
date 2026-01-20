@@ -2,8 +2,16 @@
 Зелёные - это TO DO
 # - это комментарии.
 '''
-
+# ❓ здесь мне помогала нейросеть, но я пока совсем не понимаю что тут происхрдит
 import re
+
+from fastapi import Depends, HTTPException
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
+
+from db.engine import engine
+from db.models import User
+from passlib.context import CryptContext
 
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -19,7 +27,10 @@ class User(BaseModel):
     password: str
 
 
-users = []  # типа БД
+async def get_db() -> AsyncSession:
+    async with engine() as session:
+        yield session
+
 
 '''
 TO DO НА ПОТОМ
@@ -34,33 +45,43 @@ def password_security_check(password) -> bool:
     return True
 
 
+pwd_context = CryptContext(schemes=["bcrypt"])
+
+
+def hash_password(password: str) -> str:
+    return pwd_context.hash(password)
+
+
+def verify_password(password: str, hashed: str) -> bool:
+    return pwd_context.verify(password, hashed)
+
+
 @app.post("/auth/register")
-async def add_new_user(user: User) -> User:
-    try:
-        for us in users:
-            if user.name == us.name:
-                raise OriginError("Это имя пользователя уже занято.")
-        if not user.name.isalpha():
-            raise FormatNameError("Имя пользователя может содержать только буквы.")
-        if not password_security_check(user.password):
-            raise QualityError("Пароль слишком простой.")
-    except (OriginError, FormatNameError, QualityError) as e:
-        return e.message
-    except RegistrationException as e:
-        print(e)
-    except Exception as e:
-        return ServerException(f"Произошла внутренняя ошибка сервера: {e}.")
-    else:
-        users.append(user)
-        return user
+async def add_new_user(user: User, db: AsyncSession = Depends(get_db)):
+    if not user.name.isalpha():
+        raise HTTPException(400, "Имя пользователя может содержать только буквы")
+
+    if not password_security_check(user.password):
+        raise HTTPException(400, "Пароль слишком простой")
+    result = await db.execute(select(User).where(User.login == user.name))
+    if result.scalar_one_or_none():
+        raise HTTPException(400, "Это имя пользователя уже занято")
+
+    new_user = User(login=user.name, password=hash_password(user.password), name=user.name)
+    db.add(new_user)
+    await db.commit()
+
+    return {"status": "registered"}
 
 
-@app.get("/auth/login")
-async def find_user(user: User) -> User:
-    try:
-        if user not in users:
-            raise NotFoundUserError()
-    except NotFoundUserError as e:
-        return str(e)
-    else:
-        return user
+@app.post("/auth/login")
+async def login_user(user: User, db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(User).where(User.login == user.name))
+    db_user = result.scalar_one_or_none()
+    if not db_user:
+        raise HTTPException(404, "Пользователь не найден")
+
+    if not verify_password(user.password, db_user.password):
+        raise HTTPException(401, "Неверный пароль")
+
+    return {"status": "success"}

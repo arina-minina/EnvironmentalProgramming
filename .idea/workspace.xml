@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0c57e2df-4e5e-4f55-9482-31e8a413e53a" name="Changes" comment="исправление 2">
+      <change afterPath="$PROJECT_DIR$/db/enums.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Registration/MainRegister.py" beforeDir="false" afterPath="$PROJECT_DIR$/Registration/MainRegister.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/db/engine.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/db/models.py" afterDir="false" />
     </list>

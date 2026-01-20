@@ -1,19 +1,14 @@
 # таблицы
-# ❓ 130-131, (canvas.py::24-25 - нужно ли мне это прописывать?), где мне нужно создавать все таблицы?
-# роль и статус - это разное
+# ❓ я тут пока переносила enum в другой файл, поняла, что у меня нигде не используется FileType (7 строка), что с этим делать? Я уже не помню где хотела его использовать
 from base import Base
-from enum import Enum  # python Enum — задаёт набор допустимых значений
-from sqlalchemy import String, Integer, Boolean, Date, ForeignKey
+from sqlalchemy import String, Text, Integer, Boolean, Date, ForeignKey, Enum, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from datetime import date
+from enums import UserRole, CourseStatus, SubscriptionStatus, ContentType, ProgressStatus, FileType, CheckType, \
+    TaskType, Rating, AnswerStatus
 
 
 # Mapped[...] — новый синтаксис SQLAlchemy 2.0
-
-class UserRole(Enum):  # роли
-    ADMIN = "admin"
-    STUDENT = "student"
-    AUTHOR = "author"
 
 
 class User(Base):
@@ -27,46 +22,35 @@ class User(Base):
     email: Mapped[str] = mapped_column(String(150), unique=True, nullable=True)
     is_del: Mapped[bool] = mapped_column(Boolean, default=False)
     # связь с Course
-    connect_course: Mapped[list["Course"]] = relationship("Course", back_populates="author")
+    courses: Mapped[list["Course"]] = relationship("Course", back_populates="author")
 
-    connect_sub: Mapped[list["CourseSubscriptions"]] = relationship("CourseSubscriptions", back_populates="user")
+    subscriptions: Mapped[list["CourseSubscriptions"]] = relationship("CourseSubscriptions", back_populates="user")
 
-    connect_progress: Mapped[list["LessonProgress"]] = relationship("LessonProgress", back_populates="user")
+    progress: Mapped[list["LessonProgress"]] = relationship("LessonProgress", back_populates="user")
 
-    connect_user_review: Mapped[list["Review"]] = relationship("Review", back_populates="user")
+    reviews: Mapped[list["Review"]] = relationship("Review", back_populates="user")
 
-    connect_answer: Mapped[list["Answer"]] = relationship("Answer", back_populates="user")
-
-
-class CourseStatus(Enum):
-    PAID = "paid"
-    FREE = "free"
+    answers: Mapped[list["Answer"]] = relationship("Answer", back_populates="user")
 
 
 class Course(Base):
     __tablename__ = "courses"
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(String(100), nullable=False)
-    description: Mapped[str] = mapped_column(String(500), nullable=False)
+    description: Mapped[str] = mapped_column(Text, nullable=False)
     status: Mapped[CourseStatus] = mapped_column(Enum(CourseStatus), nullable=False)
 
     # внешний ключ на User.id
     author_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
 
     # связь с объектом User
-    author: Mapped["User"] = relationship("User", back_populates="connect_course")
+    author: Mapped["User"] = relationship("User", back_populates="courses")
 
-    connect_sub: Mapped[list["CourseSubscriptions"]] = relationship("CourseSubscriptions", back_populates="course")
+    subscriptions: Mapped[list["CourseSubscriptions"]] = relationship("CourseSubscriptions", back_populates="course")
 
-    connect_lesson: Mapped[list["Lesson"]] = relationship("Lesson", back_populates="course")
+    lessons: Mapped[list["Lesson"]] = relationship("Lesson", back_populates="course")
 
-    connect_course_review: Mapped[list["Review"]] = relationship("Review", back_populates="course")
-
-
-class SubscriptionStatus(Enum):
-    ACTIVE = "active"
-    COMPLETED = "completed"
-    DROPPED = "dropped"
+    reviews: Mapped[list["Review"]] = relationship("Review", back_populates="course")
 
 
 class CourseSubscriptions(Base):
@@ -74,10 +58,10 @@ class CourseSubscriptions(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
 
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
-    user: Mapped["User"] = relationship("User", back_populates="connect_sub")
+    user: Mapped["User"] = relationship("User", back_populates="subscriptions")
 
     course_id: Mapped[int] = mapped_column(ForeignKey("courses.id"))
-    course: Mapped["Course"] = relationship("Course", back_populates="connect_sub")
+    course: Mapped["Course"] = relationship("Course", back_populates="subscriptions")
 
     status: Mapped[SubscriptionStatus] = mapped_column(Enum(SubscriptionStatus), nullable=False)
 
@@ -86,40 +70,26 @@ class Lesson(Base):
     __tablename__ = "lessons"
     id: Mapped[int] = mapped_column(primary_key=True)
     course_id: Mapped[int] = mapped_column(ForeignKey("courses.id"))
-    course: Mapped["Course"] = relationship("Course", back_populates="connect_lesson")
+    course: Mapped["Course"] = relationship("Course", back_populates="lessons")
     title: Mapped[str] = mapped_column(String(100), nullable=False)
     order_index: Mapped[int] = mapped_column(Integer)  # порядковый номер урока в курсе
 
-    connect_les_con: Mapped[list["LessonContent"]] = relationship("LessonContent", back_populates="lesson")
+    __table_args__ = (UniqueConstraint("course_id", "order_index"),)
 
-    connect_les_prog: Mapped[list["LessonProgress"]] = relationship("LessonProgress", back_populates="lesson")
+    content: Mapped[list["LessonContent"]] = relationship("LessonContent", back_populates="lesson")
 
-
-class ContentType(Enum):
-    THEORY = "theory"
-    VIDEO = "video"
+    progress: Mapped[list["LessonProgress"]] = relationship("LessonProgress", back_populates="lesson")
 
 
 class LessonContent(Base):
     __tablename__ = "lesson_content"
     id: Mapped[int] = mapped_column(primary_key=True)
     lesson_id: Mapped[int] = mapped_column(ForeignKey("lessons.id"))
-    lesson: Mapped["Lesson"] = relationship("Lesson", back_populates="connect_les_con")
+    lesson: Mapped["Lesson"] = relationship("Lesson", back_populates="content")
     type: Mapped[ContentType] = mapped_column(Enum(ContentType), nullable=False)
     file_path: Mapped[str] = mapped_column(String(500), nullable=False)
 
-    connect_les_cont: Mapped[list["Task"]] = relationship("Task", back_populates="lesson_content")
-
-
-class ProgressStatus(Enum):
-    NOT_STARTED = "not_started"
-    IN_PROGRESS = "in_progress"
-    COMPLETED = "completed"
-
-
-class FileType(Enum):
-    JSON = "json"
-    TEXT = "text"
+    content: Mapped[list["Task"]] = relationship("Task", back_populates="lesson_content")
 
 
 class LessonProgress(Base):
@@ -128,92 +98,66 @@ class LessonProgress(Base):
     status: Mapped[ProgressStatus] = mapped_column(Enum(ProgressStatus), nullable=False)
     score: Mapped[int] = mapped_column(Integer)  # полученный балл
     submission_file_path: Mapped[str] = mapped_column(
-        String(255))  # ❓json/text (ответ) *что делать, если хочу файл здесь?*
+        String(500))  # json/text (ответ)
+    text_answer: Mapped[str] = mapped_column(Text)
 
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
-    user: Mapped["User"] = relationship("User", back_populates="connect_progress")
+    user: Mapped["User"] = relationship("User", back_populates="progress")
 
     lesson_id: Mapped[int] = mapped_column(ForeignKey("lessons.id"))
-    lesson: Mapped["Lesson"] = relationship("Lesson", back_populates="connect_les_prog")
-
-
-class CheckType(Enum):
-    MANUAL = "manual"
-    AUTO = "auto"
-    AI_CHECK = "ai_check"
-
-
-class TaskType(Enum):
-    SHORT_ANSWER = "short_answer"
-    LONG_ANSWER = "long_answer"
-    CHOICES = "choices"
+    lesson: Mapped["Lesson"] = relationship("Lesson", back_populates="progress")
 
 
 class Task(Base):
     __tablename__ = "tasks"
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(String(100), nullable=False)
-    description: Mapped[str] = mapped_column(String(1000), nullable=False)
+    description: Mapped[str] = mapped_column(Text, nullable=False)
+    input_data: Mapped[str] = mapped_column(Text)
+    output_data: Mapped[str] = mapped_column(Text)
     max_score: Mapped[int] = mapped_column(Integer)  # максимальный балл за задание
 
     type_check: Mapped[CheckType] = mapped_column(Enum(CheckType), nullable=False)
     task_type: Mapped[TaskType] = mapped_column(Enum(TaskType), nullable=False)
 
     lesson_content_id: Mapped[int] = mapped_column(ForeignKey("lesson_content.id"))
-    lesson_content: Mapped["LessonContent"] = relationship("LessonContent", back_populates="connect_les_cont")
+    lesson_content: Mapped["LessonContent"] = relationship("LessonContent", back_populates="content")
 
-    connect_answer: Mapped[list["Answer"]] = relationship("Answer", back_populates="task")
+    answers: Mapped[list["Answer"]] = relationship("Answer", back_populates="task")
 
-    connect_cor_ans: Mapped[list["CorrectAnswer"]] = relationship("CorrectAnswer", back_populates="task")
-
-
-class Rating(Enum):
-    ONE = 1
-    TWO = 2
-    THREE = 3
-    FOUR = 4
-    FIVE = 5
+    correct_answers: Mapped[list["CorrectAnswer"]] = relationship("CorrectAnswer", back_populates="task")
 
 
 class Review(Base):
     __tablename__ = "reviews"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    comment: Mapped[str] = mapped_column(String(300), nullable=False)
+    comment: Mapped[str] = mapped_column(String(100), nullable=False)
     created_at: Mapped[date] = mapped_column(Date, default=date.today, nullable=False)
 
     rating: Mapped[Rating] = mapped_column(Enum(Rating), nullable=False)
 
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
-    user: Mapped["User"] = relationship("User", back_populates="connect_user_review")
+    user: Mapped["User"] = relationship("User", back_populates="reviews")
 
     course_id: Mapped[int] = mapped_column(ForeignKey("courses.id"))
-    course: Mapped["Course"] = relationship("Course", back_populates="connect_course_review")
-
-
-class AnswerStatus(Enum):
-    EMPTY = "empty"
-    UPLOADED = "uploaded"
-    SENT = "sent"
-    RECEIVED = "received"
-    CREDITED = "credited"
-    NEEDS_REVISION = "needs_revision"
+    course: Mapped["Course"] = relationship("Course", back_populates="reviews")
 
 
 class Answer(Base):
     __tablename__ = "answers"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    file_path: Mapped[str] = mapped_column(String(255), nullable=False)
+    file_path: Mapped[str] = mapped_column(String(500), nullable=False)
     comment: Mapped[str] = mapped_column(String(500), nullable=False)
 
     status: Mapped[AnswerStatus] = mapped_column(Enum(AnswerStatus), nullable=False)
 
     task_id: Mapped[int] = mapped_column(ForeignKey("tasks.id"))
-    task: Mapped["Task"] = relationship("Task", back_populates="connect_answer")
+    task: Mapped["Task"] = relationship("Task", back_populates="answers")
 
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
-    user: Mapped["User"] = relationship("User", back_populates="connect_answer")
+    user: Mapped["User"] = relationship("User", back_populates="answers")
 
 
 # только для коротких и выборных ответов
@@ -221,7 +165,7 @@ class CorrectAnswer(Base):
     __tablename__ = "correct_answers"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    cor_ans: Mapped[str] = mapped_column(String(100), nullable=False)
+    cor_ans: Mapped[str] = mapped_column(String(300), nullable=False)
 
     task_id: Mapped[int] = mapped_column(ForeignKey("tasks.id"))
-    task: Mapped["Task"] = relationship("Task", back_populates="connect_cor_ans")
+    task: Mapped["Task"] = relationship("Task", back_populates="correct_answers")
