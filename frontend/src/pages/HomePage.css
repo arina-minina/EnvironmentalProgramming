@@ -1,0 +1,108 @@
+.home-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #EFF2EF;
+  font-family: sans-serif;
+}
+
+/* Контент сдвигаем вправо, так как меню фиксированное (80px) */
+.main-content {
+  margin-left: 80px; 
+  flex: 1;
+  padding: 40px;
+}
+
+/* --- Поиск --- */
+.search-bar-container {
+  margin-bottom: 40px;
+  display: flex;
+}
+
+.search-input-wrapper {
+  position: relative; /* Важно: родитель для позиционирования лупы */
+  width: 100%;
+  max-width: 1000px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 15px 60px 15px 20px; 
+  border-radius: 12px;
+  border: none;
+  background-color: white;
+  font-size: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  outline: none;
+}
+
+.search-btn {
+  position: absolute; /* Позиционируем поверх input */
+  right: 10px;        /* Прижимаем к правому краю */
+  top: 50%;
+  transform: translateY(-50%); /* Центруем по вертикали */
+  
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+/* --- Сетка курсов --- */
+.courses-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Две колонки */
+  gap: 30px; /* Отступы между карточками */
+}
+
+/* --- Карточка --- */
+.course-card {
+  background-color: #496642;
+  opacity: 0.9;
+  border-radius: 40px;
+  padding: 40px;
+  color: white;
+  min-height: 220px;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(94, 113, 83, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+.course-title {
+  margin-top: 0;
+  font-size: 22px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.course-desc {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.more-btn {
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+  background-color: #D9D9D9;
+  color: #496642;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.more-btn:hover {
+  background-color: white;
+  color: #5E7153;
+}

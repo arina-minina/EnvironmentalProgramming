@@ -1,0 +1,195 @@
+.course-page-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background-color: #EFF2EF;
+  font-family: sans-serif;
+  overflow: hidden; /* Чтобы страница не скроллилась целиком, если мы хотим скролл внутри */
+}
+
+.course-content {
+  margin-left: 80px; 
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.course-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+
+.btn-back {
+  background-color: #496642;
+  color: #98B398;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-back:hover {
+  background-color: rgba(73, 102, 66, 0.85);
+}
+
+.btn-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.btn-start {
+  background-color: transparent;
+  color: #496642;
+  border: 2px solid #496642;
+  padding: 10px 25px;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-start:hover {
+  background-color: rgba(73, 102, 66, 0.1);
+}
+
+.course-grid {
+  display: flex;
+  gap: 40px;
+  flex-grow: 1;
+  overflow: hidden; /* Чтобы скроллились только отзывы или описание при необходимости */
+  padding-bottom: 20px;
+}
+
+/* Левая часть */
+.course-left-column {
+  flex: 2; /* 66% ширины */
+  display: flex;
+  flex-direction: column;
+}
+
+.page-title {
+  text-align: center;
+  color: #415E3A;
+  font-size: 36px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.description-box {
+  background-color: #606F4E;
+  opacity: 0.7;
+  border-radius: 15px;
+  padding: 40px;
+  color: white;
+  font-size: 20px;
+  flex-grow: 1;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Правая часть */
+.course-right-column {
+  flex: 1; /* 33% ширины */
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.section-title {
+  text-align: center;
+  color: #496642;
+  font-size: 28px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+/* Пунктирная рамка */
+.reviews-border-box {
+  border: 2px dashed #B0C4B0;
+  border-radius: 20px;
+  padding: 15px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto; /* Скролл только здесь */
+  padding-right: 5px;
+  height: 100%;
+}
+
+/* Кастомный скроллбар */
+.reviews-list::-webkit-scrollbar {
+  width: 6px;
+}
+.reviews-list::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 3px;
+}
+
+/* Карточка отзыва */
+.review-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px 5px 5px;
+}
+
+.review-author {
+  font-weight: bold;
+  color: #5B7554;
+  font-size: 18px;
+}
+
+.rating-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #5B7554;
+  color: #5B7554;
+  font-weight: bold;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.review-bubble {
+  background-color: #8B967E;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 14px;
+  position: relative;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.review-date {
+  font-size: 11px;
+  align-self: flex-end;
+  opacity: 0.8;
+  margin-top: 10px;
+}

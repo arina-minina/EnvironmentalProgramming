@@ -1,0 +1,45 @@
+.sidebar {
+  width: 80px;
+  background-color: #6C846E;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+}
+
+.sidebar-center {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.6; 
+  transition: 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* Эффект при наведении и для активной кнопки */
+.icon-btn:hover {
+  opacity: 1; /* Делаем иконку полностью яркой */
+  transform: scale(1.1); /* Легкое увеличение для красоты */
+}
+
+/* Стили для самой картинки */
+.icon-btn img {
+  width: 28px; /* Размер иконки */
+  height: 28px;
+  object-fit: contain; /* Чтобы иконка не сплющилась */
+}
