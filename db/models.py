@@ -1,10 +1,10 @@
 # таблицы
 # ❓ я тут пока переносила enum в другой файл, поняла, что у меня нигде не используется FileType (7 строка), что с этим делать? Я уже не помню где хотела его использовать
-from base import Base
+from db.base import Base
 from sqlalchemy import String, Text, Integer, Boolean, Date, ForeignKey, Enum, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from datetime import date
-from enums import UserRole, CourseStatus, SubscriptionStatus, ContentType, ProgressStatus, FileType, CheckType, \
+from db.enums import UserRole, CourseStatus, SubscriptionStatus, ContentType, ProgressStatus, FileType, CheckType, \
     TaskType, Rating, AnswerStatus
 
 
@@ -19,6 +19,7 @@ class User(Base):
     password: Mapped[str] = mapped_column(String(255), nullable=False)  # хранит хэши паролей
     name: Mapped[str] = mapped_column(String(100), nullable=False)
     role: Mapped[UserRole] = mapped_column(Enum(UserRole), nullable=False, default=UserRole.STUDENT)
+    phone_number: Mapped[str] = mapped_column(String(50), nullable=True)
     email: Mapped[str] = mapped_column(String(150), unique=True, nullable=True)
     is_del: Mapped[bool] = mapped_column(Boolean, default=False)
     # связь с Course
@@ -38,6 +39,7 @@ class Course(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(String(100), nullable=False)
     description: Mapped[str] = mapped_column(Text, nullable=False)
+    short_description: Mapped[str] = mapped_column(Text, nullable=False)
     status: Mapped[CourseStatus] = mapped_column(Enum(CourseStatus), nullable=False)
 
     # внешний ключ на User.id
