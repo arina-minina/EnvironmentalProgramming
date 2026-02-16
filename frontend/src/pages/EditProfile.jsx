@@ -1,19 +1,53 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import './EditProfile.css';
 import editIcon from '../assets/icons/edit.svg';
+import axios from 'axios';
 
 const EditProfile = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   const [formData, setFormData] = useState({
-    login: "eco_user_2024",
-    password: "password123",
-    name: "Анна Тест",
-    phone: "+7 (999) 000-00-00",
-    email: "example@eco.com"
+    user_id: null,
+    login: "",
+    password: "",
+    name: "",
+    phone_number: "",
+    email: ""
   });
+
+  useEffect(() => {
+    const loadUserData = async () => {
+      const currentLogin = localStorage.getItem('username');
+      if (!currentLogin) {
+        navigate('/login');
+        return;
+      }
+
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/profile', {
+          params: { login: currentLogin }
+        });
+        setFormData({
+          user_id: response.data.id,
+          login: response.data.login,
+          name: response.data.name,
+          email: response.data.email,
+          phone_number: response.data.phone_number,
+          password: response.data.password
+        });
+      } catch (err) {
+        console.error("Ошибка загрузки:", err);
+        alert("Не удалось загрузить данные пользователя");
+        navigate('/profile');
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadUserData();
+  }, [navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,15 +57,46 @@ const EditProfile = () => {
     }));
   };
 
-  const handleSave = () => {
-    // TODO логика сохранения (1 - Сделать Put/Post запрос на сервер, Если успешно, то 2 - Поменять значения локально. useState)
-    alert("Изменения сохранены!");
-    navigate('/profile');
+  const handleSave = async () => {
+    setLoading(true);
+    try {
+      const payload = {
+        user_id: formData.user_id,
+        login: formData.login,
+        name: formData.name,
+        email: formData.email || null,
+        phone_number: formData.phone_number || null,
+        password: formData.password || null 
+      };
+
+      await axios.put('http://127.0.0.1:8000/edit-profile', payload);
+
+      if (formData.login !== localStorage.getItem('username')) {
+        localStorage.setItem('username', formData.login);
+      }
+
+      alert("Изменения успешно сохранены!");
+      navigate('/profile');
+
+    } catch (err) {
+      console.error("Ошибка сохранения:", err);
+      if (err.response && err.response.data) {
+        alert(`Ошибка: ${err.response.data.detail}`);
+      } else {
+        alert("Не удалось сохранить изменения.");
+      }
+    } finally {
+        setLoading(false);
+      }
   };
 
   const handleCancel = () => {
     navigate('/profile'); 
   };
+
+  if (loading) {
+    return <div className="profile-container" style={{padding: '50px'}}>Загрузка данных...</div>;
+  }
 
   return (
     <div className="profile-container">
@@ -97,8 +162,8 @@ const EditProfile = () => {
               <label className="field-label">Номер телефона:</label>
               <input 
                 type="text" 
-                name="phone"
-                value={formData.phone} 
+                name="phone_number"
+                value={formData.phone_number} 
                 onChange={handleChange}
                 className="custom-input"
               />

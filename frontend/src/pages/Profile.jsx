@@ -1,24 +1,53 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import './Profile.css';
 import editIcon from '../assets/icons/edit.svg'; 
+import axios from 'axios';
 
 const Profile = () => {
   const navigate = useNavigate();
 
-  // TODO получать эти данные при первой загрузке страницы (useEffect), через get запрос на /profile/
-  const userData = {
-    login: "eco_user_2024",
-    password: "••••••••",
-    name: "Анна Тест",
-    phone: "+7 (999) 000-00-00",
-    email: "example@eco.com"
-  };
+  // TODO получать эти данные при первой загрузке страницы (useEffect), через get запрос на .../profile
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+    useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const currentLogin = localStorage.getItem('username');
+        if (!currentLogin) {
+          navigate('/login');
+          return;
+        }
+        const response = await axios.get('http://127.0.0.1:8000/profile', {
+          params: { login: currentLogin }
+        });
+        // Сохраняем полученные данные в состояние
+        setUserData(response.data);
+      } catch (err) {
+        console.error("Ошибка:", err);
+        setError("Не удалось загрузить данные профиля.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [navigate]);
 
   const handleEditClick = () => {
     navigate('/edit-profile');
   };
+
+  if (loading) {
+    return <div className="profile-container" style={{padding: '40px'}}>Загрузка...</div>;
+  }
+  if (error) {
+    return <div className="profile-container" style={{color: 'red', padding: '40px'}}>{error}</div>;
+  }
+  if (!userData) return null;
 
   return (
     <div className="profile-container">
@@ -56,7 +85,7 @@ const Profile = () => {
             </div>
             <div className="info-field">
               <span className="field-label">Номер телефона:</span>
-              <span className="field-value">{userData.phone}</span>
+              <span className="field-value">{userData.phone_number}</span>
             </div>
             <div className="info-field">
               <span className="field-label">Эл. почта:</span>
