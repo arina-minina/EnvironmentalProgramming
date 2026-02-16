@@ -1,33 +1,30 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Sidebar from '../components/Sidebar'; // Импортируем твой готовый компонент
+import Sidebar from '../components/Sidebar';
 import './SignUpCourse.css';
+import backIcon from '../assets/icons/back_arrow.svg';
 
 const SignUpCourse = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Логика отправки формы
     alert("Заявка отправлена!");
   };
 
   return (
     <div className="signup-page-container">
-      {/* Твой готовый сайдбар */}
       <Sidebar />
 
-      {/* Основной контент с отступом слева */}
       <main className="signup-content">
         
-        {/* Кнопка "Назад" */}
         <div className="top-nav">
-          <button className="back-btn" onClick={() => navigate(-1)}>
-            <span className="arrow-icon">←</span> Назад
-          </button>
+          <button className="btn-back" onClick={() => navigate(-1)}>
+                      <img src={backIcon} alt="Назад" className="btn-icon" />
+                      <span>Назад</span>
+                    </button>
         </div>
 
-        {/* Центральный блок с формой */}
         <div className="center-wrapper">
           <h1 className="course-title">Запись на курс</h1>
 

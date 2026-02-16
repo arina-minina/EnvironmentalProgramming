@@ -44,19 +44,19 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="login-page" style={{ backgroundImage: `url(${bgImage})` }}>
-      <div className='content-box'>
+    <div className="reg-wrapper" style={{ backgroundImage: `url(${bgImage})` }}>
+      <div className='reg-content'>
 
-        <h1 className='page-title'>Регистрация</h1>
+        <h1 className='reg-title'>Регистрация</h1>
 
-        <form className='auth-card' onSubmit={handleRegister}>
+        <form className='reg-card' onSubmit={handleRegister}>
           <input
             type='text'
             name='username'             
             value={formData.username}   
             onChange={handleChange}     
             placeholder='Логин'
-            className='custom-input'
+            className='reg-input'
           />
 
           <input
@@ -65,7 +65,7 @@ const LoginPage = () => {
             value={formData.password}
             onChange={handleChange}
             placeholder='Пароль'
-            className='custom-input'
+            className='reg-input'
           />
 
           <input
@@ -74,12 +74,12 @@ const LoginPage = () => {
             value={formData.confirmPassword}
             onChange={handleChange}
             placeholder='Повторите пароль'
-            className='custom-input'
+            className='reg-input'
           />
 
-          <button type='submit' className='login-btn'>Зарегистрироваться</button>
+          <button type='submit' className='reg-submit-btn'>Зарегистрироваться</button>
           
-          <div className="card-footer">
+          <div className="reg-footer">
             <Link to="/login" className="reg-link">Вход</Link>
           </div>
         </form>

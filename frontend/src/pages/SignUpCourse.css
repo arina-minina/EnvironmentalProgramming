@@ -1,78 +1,71 @@
-/* Контейнер на всю ширину и высоту */
 .signup-page-container {
   display: flex;
   min-height: 100vh;
-  background-color: #F4F6F4; /* Светло-серый/зеленоватый фон страницы */
+  background-color: #EFF2EF;
   font-family: 'Segoe UI', sans-serif;
 }
 
-/* Основная область контента */
 .signup-content {
   flex: 1;
-  /* ВАЖНО: Учитываем ширину сайдбара. 
-     Если твой Sidebar position: fixed, то используй margin-left: 80px.
-     Если Sidebar просто блок в flex, то margin не нужен, flex сам распределит.
-     Оставляю margin-left для надежности, как ты просила. */
   margin-left: 80px; 
   padding: 40px;
   display: flex;
   flex-direction: column;
 }
 
-/* Навигация сверху (кнопка Назад) */
 .top-nav {
   display: flex;
   justify-content: flex-start;
   margin-bottom: 20px;
+  position: relative;
+  z-index: 10;
 }
 
-.back-btn {
-  background-color: #556B58; /* Темно-зеленый цвет кнопки */
-  color: #fff;
+.btn-back {
+  background-color: #496642;
+  color: #98B398;
   border: none;
-  border-radius: 20px; /* Закругленная кнопка */
-  padding: 8px 24px;
+  padding: 10px 25px;
+  border-radius: 20px;
   font-size: 16px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
-  transition: opacity 0.3s;
+  justify-content: center;
+  gap: 10px;
+  transition: background-color 0.3s ease;
 }
 
-.back-btn:hover {
-  opacity: 0.9;
+.btn-back:hover {
+  background-color: rgba(73, 102, 66, 0.85);
 }
 
 .arrow-icon {
-  font-size: 18px;
-  line-height: 1;
+  width: 20px;
+  height: 20px;
 }
 
-/* Обертка для центрирования заголовка и карточки */
 .center-wrapper {
-  flex: 1; /* Занимает все доступное место по высоте */
+  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Центрирует по вертикали */
-  align-items: center;     /* Центрирует по горизонтали */
-  margin-top: -60px;       /* Небольшая коррекция, чтобы было визуально выше */
+  justify-content: center;
+  align-items: center;
+  margin-top: -60px;
 }
 
-/* Заголовок */
 .course-title {
-  color: #3F5243; /* Темно-зеленый текст */
+  color: #496642;
   font-size: 36px;
   font-weight: 700;
   margin-bottom: 30px;
-  font-style: italic; /* Курсив как на макете */
+  font-style: italic;
 }
 
-/* Зеленая карточка формы */
 .course-card {
-  background-color: #7B8F7D; /* Основной "болотный" цвет плашки */
+  background-color: rgba(96, 111, 78, 0.8);
   padding: 50px 60px;
-  border-radius: 20px;
+  border-radius: 38px;
   width: 100%;
   max-width: 500px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
@@ -81,51 +74,47 @@
 .course-card form {
   display: flex;
   flex-direction: column;
-  gap: 25px; /* Расстояние между полями */
+  gap: 25px;
 }
 
-/* Поля ввода */
 .custom-field {
-  background-color: #CAD7CB; /* Светло-зеленый фон инпута */
+  background-color: #C8D6C8;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 14px 20px;
   font-size: 16px;
-  color: #4A5F4D;
+  color: #98B398;
   outline: none;
   width: 100%;
-  box-sizing: border-box; /* Чтобы padding не увеличивал ширину */
+  box-sizing: border-box;
 }
 
 .custom-field::placeholder {
-  color: #8CA090; /* Цвет плейсхолдера */
+  color: #98B398;
 }
 
 .custom-field:focus {
   background-color: #Dbe7Dc;
 }
 
-/* Контейнер кнопки для центрирования */
 .btn-container {
   display: flex;
   justify-content: center;
   margin-top: 15px;
 }
 
-/* Кнопка "Записаться" */
 .submit-course-btn {
-  background-color: #445946; /* Темный фон кнопки */
-  color: #AAB9AD; /* Светло-серый текст */
+  background-color: #496642;
+  color: #fff;
   border: none;
-  border-radius: 6px;
+  border-radius: 20px;
   padding: 12px 40px;
   font-size: 18px;
   cursor: pointer;
-  width: 70%; /* Кнопка не на всю ширину, а поменьше */
+  width: 70%;
   transition: transform 0.2s;
 }
 
 .submit-course-btn:hover {
-  transform: scale(1.02);
-  background-color: #38493b;
+  background-color: #364233;
 }

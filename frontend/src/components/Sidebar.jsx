@@ -21,7 +21,7 @@ const Sidebar = () => {
            <img src={homeIcon} alt="Главная" />
         </Link>
         
-        <Link to="/courses" className="icon-btn">
+        <Link to="/my-courses" className="icon-btn">
           <img src={coursesIcon} alt="Мои курсы" />
         </Link>
         

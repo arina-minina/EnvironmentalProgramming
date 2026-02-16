@@ -35,7 +35,7 @@ const HomePage = () => {
             <div key={course.id} className="course-card">
               <h3 className="course-title">{course.title}</h3>
               <p className="course-desc">{course.desc}</p>
-              <button className="more-btn">Подробнее</button>
+              <button className="more-btn">К выполнению</button>
             </div>
           ))}
         </div>

@@ -1,4 +1,3 @@
-/* Убираем отступы у всей страницы и скрываем прокрутку */
 body, html {
   margin: 0;
   padding: 0;
@@ -12,47 +11,48 @@ body, html {
   font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
-/* Фон на весь экран */
-.login-page {
-  background-image: url('../assets/Desktop.png');
+.login-wrapper, .reg-wrapper {
   width: 100vw;
   height: 100vh;
   display: flex;
-  justify-content: center; /* Центрирование по горизонтали */
-  align-items: center;     /* Центрирование по вертикали */
+  justify-content: center;
+  align-items: center;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-/* Контейнер для выравнивания заголовка "Авторизация" и карточки в столбик */
-.content-box {
+.login-wrapper {
+  background-image: url('../assets/Desktop.png');
+}
+
+.login-content, .reg-content {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.page-title {
+.login-title, .reg-title {
   font-size: 3rem;
   color: #496642;
-  margin-bottom: 25px; /* Отступ до зеленой карточки */
+  margin-bottom: 25px;
   font-style: italic;
   margin-top: 0;
 }
 
-.auth-card {
+.login-card, .reg-card {
   background-color: rgba(96, 111, 78, 0.65);
   width: 500px;
   padding: 50px 60px 80px 60px;
   border-radius: 38px;
   display: flex;
   flex-direction: column;
-  gap: 25px; /* Расстояние между инпутами */
-  position: relative; /* Важно для позиционирования регистрации */
+  gap: 25px;
+  position: relative;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-.custom-input {
+.login-input, .reg-input {
   width: 100%;
   height: 50px;
   background-color: #C8D6C8;
@@ -63,12 +63,11 @@ body, html {
   font-size: 1.1rem;
 }
 
-/* Цвет текста-подсказки на input`ах */
-.custom-input::placeholder {
+.login-input::placeholder, .reg-input::placeholder {
   color: #98B398;
 }
 
-.login-btn {
+.login-submit-btn, .reg-submit-btn {
   width: 250px;
   height: 50px;
   background-color: #496642;
@@ -76,23 +75,23 @@ body, html {
   border: none;
   border-radius: 20px;
   font-size: 20px;
-  cursor: pointer; /* При наведении - курсор-палец */
-  align-self: center; /* Центрируем кнопку внутри флекс-контейнера */
+  cursor: pointer;
+  align-self: center;
   margin-top: 10px;
-  transition: background 0.3s; /* Время изменения цвета при наведении */
+  transition: background 0.3s;
 }
 
-.login-btn:hover {
+.login-submit-btn:hover, .reg-submit-btn:hover {
   background-color: #364233;
 }
 
-.card-footer {
+.login-footer, .reg-footer {
   position: absolute;
   bottom: 25px;
   left: 30px;
 }
 
-.reg-link {
+.login-link, .reg-link {
   text-decoration: none;
   border: 2px solid #496642;
   color: #eaf1eb;
@@ -104,7 +103,7 @@ body, html {
   display: inline-block;
 }
 
-.reg-link:hover {
+.login-link:hover, .reg-link:hover {
   opacity: 1;
   background-color: rgba(255, 255, 255, 0.1);
 }
