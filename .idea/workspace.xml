@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c57e2df-4e5e-4f55-9482-31e8a413e53a" name="Changes" comment="исправление 2">
-      <change afterPath="$PROJECT_DIR$/create_tables.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/schemas.py" afterDir="false" />
+    <list default="true" id="0c57e2df-4e5e-4f55-9482-31e8a413e53a" name="Changes" comment="новый">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Registration/MainRegister.py" beforeDir="false" afterPath="$PROJECT_DIR$/Registration/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/db/engine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/db/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Registration/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Registration/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +130,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766088929110</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="новый">
+      <option name="closed" value="true" />
+      <created>1771244791875</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1771244791875</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -153,17 +157,7 @@
     <MESSAGE value="выполнение TO DO" />
     <MESSAGE value="исправление" />
     <MESSAGE value="исправление 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="исправление 2" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Registration/main.py</url>
-          <line>108</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="новый" />
+    <option name="LAST_COMMIT_MESSAGE" value="новый" />
   </component>
 </project>

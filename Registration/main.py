@@ -11,7 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import select
 
 from db.engine import engine, async_session_maker
-from db.models import User
+from db.models import User, Course
 from passlib.context import CryptContext
 
 from fastapi import FastAPI
@@ -29,7 +29,7 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Указываем конкретные адреса вместо ["*"]
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -106,7 +106,6 @@ async def profile(login: str, db: AsyncSession = Depends(get_db)):
     return {
         "id": user.id,
         "login": user.login,
-        "password": user.password,
         "name": user.name,
         "phone_number": user.phone_number,
         "email": user.email
@@ -144,6 +143,22 @@ async def login_user(user: UserSchema, db: AsyncSession = Depends(get_db)):
         raise HTTPException(401, "Неверный пароль")
 
     return {"status": "success"}
+
+
+@app.get("/courses")
+async def get_courses(db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(Course))
+    courses_list = result.scalars().all()
+    if not courses_list:
+        return []
+    response = []
+    for course in courses_list:
+        response.append({
+            "id": course.id,
+            "title": course.title,
+            "short_description": course.short_description
+        })
+    return response
 
 
 if __name__ == "__main__":
