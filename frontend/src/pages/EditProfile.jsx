@@ -136,9 +136,11 @@ const EditProfile = () => {
               <input 
                 type="password" 
                 name="password"
-                value={formData.password} 
+                value={formData.password || ""} 
                 onChange={handleChange}
                 className="custom-input"
+                placeholder="Новый пароль (оставьте пустым, если не меняете)"
+                autoComplete="new-password"
               />
             </div>
           </div>

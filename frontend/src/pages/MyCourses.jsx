@@ -12,30 +12,30 @@ const HomePage = () => {
   ];
 
   return (
-    <div className="home-container">
+    <div className="homepage-container">
       <Sidebar />
 
-      <main className="main-content">
+      <main className="homepage-main-content">
 
-        <div className="search-bar-container">
-          <div className="search-input-wrapper">
+        <div className="homepage-search-bar-container">
+          <div className="homepage-search-input-wrapper">
             <input 
               type="text" 
               placeholder="Поиск по курсам..." 
-              className="search-input"
+              className="homepage-search-input"
             />
-            <button className="search-btn">
+            <button className="homepage-search-btn">
               <img src={searchIcon} alt="Поиск" />
             </button>
           </div>
         </div>
 
-        <div className="courses-grid">
+        <div className="homepage-courses-grid">
           {courses.map((course) => (
-            <div key={course.id} className="course-card">
-              <h3 className="course-title">{course.title}</h3>
-              <p className="course-desc">{course.desc}</p>
-              <button className="more-btn">К выполнению</button>
+            <div key={course.id} className="homepage-course-card">
+              <h3 className="homepage-course-title">{course.title}</h3>
+              <p className="homepage-course-desc">{course.short_description}</p>
+              <button className="homepage-more-btn">К выполнению</button>
             </div>
           ))}
         </div>

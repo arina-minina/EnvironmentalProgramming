@@ -71,7 +71,7 @@ const Profile = () => {
             </div>
             <div className="info-field">
               <span className="field-label">Пароль:</span>
-              <span className="field-value">{userData.password}</span>
+              <span className="field-value">••••••••••••</span>
             </div>
           </div>
         </section>

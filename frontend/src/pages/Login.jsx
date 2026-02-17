@@ -12,7 +12,7 @@ const LoginPage = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/auth/login', {
+      const response = await axios.post('/auth/login', {
         username: username,
         password: password
       });
@@ -57,7 +57,7 @@ const LoginPage = () => {
           <button type='submit' className='login-submit-btn'>Войти</button>
 
           <div className="login-footer">
-            <Link to="/register2" className="login-link">Регистрация</Link>
+            <Link to="/register" className="login-link">Регистрация</Link>
           </div>
         </form>
       </div>

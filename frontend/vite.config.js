@@ -13,6 +13,12 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
+      // Добавляем правило для курсов
+      '/courses': {
+        target: 'http://127.0.0.1:8000',
+        changeOrigin: true,
+        secure: false,
+      },
     },
   },
 })

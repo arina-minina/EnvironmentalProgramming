@@ -1,41 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Sidebar from '../components/Sidebar';
 import searchIcon from '../assets/icons/search.svg'; 
 import './HomePage.css';
 
 const HomePage = () => {
-  const courses = [
-    { id: 1, title: 'Название курса', desc: '*краткое описание*' },
-    { id: 2, title: 'Название курса', desc: '*краткое описание*' },
-    { id: 3, title: 'Название курса', desc: '*краткое описание*' },
-    { id: 4, title: 'Название курса', desc: '*краткое описание*' },
-  ];
+  const [courses, setCourses] = useState([])
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get('/courses');
+        setCourses(response.data);
+      } catch (error) {
+        console.error("Ошибка при загрузке курсов:", error);
+      }
+    };
+    fetchCourses();
+  }, []);
 
   return (
-    <div className="home-container">
+    <div className="homepage-container">
       <Sidebar />
 
-      <main className="main-content">
+      <main className="homepage-main-content">
 
-        <div className="search-bar-container">
-          <div className="search-input-wrapper">
+        <div className="homepage-search-bar-container">
+          <div className="homepage-search-input-wrapper">
             <input 
               type="text" 
               placeholder="Поиск по курсам..." 
-              className="search-input"
+              className="homepage-search-input"
             />
-            <button className="search-btn">
+            <button className="homepage-search-btn">
               <img src={searchIcon} alt="Поиск" />
             </button>
           </div>
         </div>
 
-        <div className="courses-grid">
+        <div className="homepage-courses-grid">
           {courses.map((course) => (
-            <div key={course.id} className="course-card">
-              <h3 className="course-title">{course.title}</h3>
-              <p className="course-desc">{course.desc}</p>
-              <button className="more-btn">Подробнее</button>
+            <div key={course.id} className="homepage-course-card">
+              <h3 className="homepage-course-title">{course.title}</h3>
+              <p className="homepage-course-desc">{course.short_description}</p>
+              <button className="homepage-more-btn">Подробнее</button>
             </div>
           ))}
         </div>
