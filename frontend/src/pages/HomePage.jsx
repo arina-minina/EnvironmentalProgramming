@@ -9,10 +9,10 @@ const HomePage = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await axios.get('/courses');
+        const response = await axios.get('http://127.0.0.1:8000/courses');
         setCourses(response.data);
-      } catch (error) {
-        console.error("Ошибка при загрузке курсов:", error);
+      } catch (err) {
+        console.error("Ошибка при загрузке курсов:", err);
       }
     };
     fetchCourses();

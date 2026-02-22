@@ -1,0 +1,209 @@
+.practice-block-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  background-color: #EFF2EF;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  overflow: hidden;
+}
+
+.practice-block-main-content {
+  margin-left: 80px;
+  flex: 1;
+  padding: 15px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.practice-block-top-nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  flex-shrink: 0;
+}
+
+.practice-nav-btn {
+  background-color: #496642;
+  color: #98B398;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.practice-nav-btn:hover {
+  background-color: rgba(73, 102, 66, 0.85);
+}
+
+.practice-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.practice-block-title {
+  color: #415E3A;
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 10px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.practice-task-indicators {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.practice-indicator-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #496642;
+  background-color: transparent;
+  color: #496642;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.practice-indicator-circle:hover {
+  background-color: #dae6da;
+}
+
+.practice-indicator-circle.active {
+  background-color: #496642;
+  color: #EFF2EF;
+}
+
+.practice-task-card {
+  width: 100%;
+  max-width: 900px;
+  flex: 1;
+  background-color: #C8D6C8;
+  border-radius: 12px;
+  padding: 30px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  margin-bottom: 20px;
+}
+
+.practice-content-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 20px;
+}
+
+.practice-question-text {
+  color: #415E3A;
+  font-size: 20px;
+  text-align: center;
+  margin: 0;
+  line-height: 1.4;
+  max-width: 90%;
+  font-weight: 600;
+}
+
+.practice-input-field {
+  width: 100%;
+  max-width: 450px;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 2px solid #fff;
+  font-size: 16px;
+  outline: none;
+}
+
+.practice-submit-btn {
+  background-color: #496642;
+  color: #fff;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  margin-top: 10px;
+}
+
+.practice-options-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.practice-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 17px;
+  color: #415E3A;
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: background-color 0.2s;
+}
+
+.practice-checkbox-label:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.practice-code-placeholder {
+  width: 100%;
+  max-width: 600px;
+  height: 200px;
+  background-color: #F8FBF8;
+  border: 2px dashed #496642;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  opacity: 0.7;
+}
+
+.practice-placeholder-text {
+  font-family: 'Consolas', monospace;
+  font-size: 20px;
+  color: #496642;
+  font-weight: 600;
+}
+
+.practice-placeholder-subtext {
+  font-size: 14px;
+  color: #496642;
+}

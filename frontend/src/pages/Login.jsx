@@ -12,13 +12,14 @@ const LoginPage = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('/auth/login', {
+      const response = await axios.post('http://127.0.0.1:8000/auth/login', {
         username: username,
         password: password
       });
 
       if (response.data.status === "success") {
         localStorage.setItem('username', username);
+        localStorage.setItem('id', response.data.id);
         navigate('/profile');
       }
 

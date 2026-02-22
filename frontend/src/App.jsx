@@ -8,6 +8,9 @@ import SignUpCourse from './pages/SignUpCourse';
 import MyCourses from './pages/MyCourses';
 import Profile from './pages/Profile';
 import EditProfile from './pages/EditProfile';
+import VideoBlock from './pages/VideoBlock';
+import TheoryBlock from './pages/TheoryBlock';
+import PracticeBlock from './pages/PracticeBlock';
 
 function App() {
   return (
@@ -21,6 +24,9 @@ function App() {
         <Route path="/my-courses" element={<MyCourses />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/edit-profile" element={<EditProfile />} />
+        <Route path="/video-block" element={<VideoBlock />} />
+        <Route path="/theory-block" element={<TheoryBlock />} />
+        <Route path="/practice-block" element={<PracticeBlock />} />
       </Routes>
     </BrowserRouter>
   );
