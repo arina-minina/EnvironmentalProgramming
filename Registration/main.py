@@ -11,7 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import select
 
 from db.engine import engine, async_session_maker
-from db.models import User, Course
+from db.models import User, Course, CourseSubscriptions
 from passlib.context import CryptContext
 
 from fastapi import FastAPI
@@ -142,7 +142,11 @@ async def login_user(user: UserSchema, db: AsyncSession = Depends(get_db)):
     if not verify_password(user.password, db_user.password):
         raise HTTPException(401, "Неверный пароль")
 
-    return {"status": "success"}
+    return {
+        "status": "success",
+        "id": db_user.id,
+        "username": db_user.login
+    }
 
 
 @app.get("/courses")
@@ -160,6 +164,22 @@ async def get_courses(db: AsyncSession = Depends(get_db)):
         })
     return response
 
+
+@app.get("/user-courses")
+async def get_user_courses(user_id: int, db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(Course).join(CourseSubscriptions, Course.id == CourseSubscriptions.course_id)
+                              .where(CourseSubscriptions.user_id == user_id))
+    courses_list = result.scalars().all()
+    if not courses_list:
+        return []
+    response = []
+    for course in courses_list:
+        response.append({
+            "id": course.id,
+            "title": course.title,
+            "short_description": course.short_description
+        })
+    return response
 
 if __name__ == "__main__":
     uvicorn.run(app)

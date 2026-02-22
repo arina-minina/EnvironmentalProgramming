@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c57e2df-4e5e-4f55-9482-31e8a413e53a" name="Changes" comment="новый">
+    <list default="true" id="0c57e2df-4e5e-4f55-9482-31e8a413e53a" name="Changes" comment="блок 3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Registration/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Registration/main.py" afterDir="false" />
     </list>
@@ -47,12 +47,19 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Python.create_tables.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
     &quot;Python.test.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/PythonProjects/EnvironmentalProgramming/Registration&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\PythonProjects\EnvironmentalProgramming\Registration" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="create_tables" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="EnvironmentalProgramming" />
@@ -138,7 +145,15 @@
       <option name="project" value="LOCAL" />
       <updated>1771244791875</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="блок 3">
+      <option name="closed" value="true" />
+      <created>1771350861738</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1771350861738</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -158,6 +173,7 @@
     <MESSAGE value="исправление" />
     <MESSAGE value="исправление 2" />
     <MESSAGE value="новый" />
-    <option name="LAST_COMMIT_MESSAGE" value="новый" />
+    <MESSAGE value="блок 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="блок 3" />
   </component>
 </project>
