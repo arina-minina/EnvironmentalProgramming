@@ -1,0 +1,156 @@
+.message-form-container {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #EFF2EF;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.message-form-main-content {
+  margin-left: 80px;
+  flex: 1;
+  padding: 40px 60px;
+  display: flex;
+  flex-direction: column;
+}
+
+.message-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.message-form-title {
+  color: #728871;
+  font-size: 36px;
+  font-weight: 700;
+  font-style: italic;
+  margin: 0;
+}
+
+.message-form-back-btn {
+  background-color: #496642;
+  color: #98B398;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.message-form-back-btn:hover {
+  opacity: 0.9;
+}
+
+.message-form-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.message-form-card {
+  background-color: #C8D6C8;
+  border-radius: 16px;
+  padding: 30px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.message-form-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.message-form-inputs-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex: 1;
+  max-width: 500px;
+}
+
+.message-form-field-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-height: 40px;
+}
+
+.message-form-label {
+  font-weight: 700;
+  color: #566755;
+  font-size: 18px;
+  width: 70px;
+  text-align: right;
+}
+
+.message-form-input {
+  flex: 1;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 16px;
+  outline: none;
+  color: #333;
+  height: 40px;
+  box-sizing: border-box;
+}
+
+.message-form-text-value {
+  font-size: 18px;
+  color: #566755;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
+.message-form-send-btn {
+  background-color: #496642;
+  color: #98B398;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.message-form-send-btn:hover {
+  opacity: 0.9;
+}
+
+.message-form-textarea {
+  width: 100%;
+  min-height: 350px;
+  border: none;
+  border-radius: 6px;
+  padding: 20px;
+  font-size: 16px;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  resize: none;
+  outline: none;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.message-form-textarea::placeholder {
+  color: #C8D6C8;
+}

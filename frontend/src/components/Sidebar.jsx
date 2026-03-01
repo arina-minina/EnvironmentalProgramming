@@ -25,16 +25,16 @@ const Sidebar = () => {
           <img src={coursesIcon} alt="Мои курсы" />
         </Link>
         
-        <div className="icon-btn">
+        <Link to="/messages" className="icon-btn">
           <img src={messageIcon} alt="Сообщения" />
-        </div>
+        </Link>
       </div>
 
-      <div className="sidebar-bottom">
+      <Link to="/ai-helper" className="sidebar-bottom">
          <div className="icon-btn">
           <img src={botIcon} alt="Помощь" />
          </div>
-      </div>
+      </Link>
     </aside>
   );
 };
